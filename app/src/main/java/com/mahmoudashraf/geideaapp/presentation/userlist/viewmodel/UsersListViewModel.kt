@@ -36,6 +36,22 @@ class UsersListViewModel @Inject constructor(
         }
     }
 
+    fun loadCachedData() {
+        screenState.postValue(UsersListScreenState.Loading)
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val result = usersInterActor.getCachedUsers()
+                screenState.postValue(UsersListScreenState.Success(result))
+            } catch (exception: Exception) {
+                screenState.postValue(
+                    UsersListScreenState.Error(
+                        message = exception.message ?: "Something wrong happened!"
+                    )
+                )
+            }
+        }
+    }
+
 }
 
 sealed class UsersListScreenState {

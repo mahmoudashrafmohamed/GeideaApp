@@ -8,4 +8,5 @@ import javax.inject.Inject
 class UsersInterActor @Inject constructor(private val usersRepository: UsersRepository) {
     suspend fun getAllUsers(): UserResponse = usersRepository.getAllUsers()
     suspend fun getUserByID(userID: Int): UserDetails = usersRepository.getUserByID(userID)
+    fun getCachedUsers() = usersRepository.getAllCachedUsers()
 }

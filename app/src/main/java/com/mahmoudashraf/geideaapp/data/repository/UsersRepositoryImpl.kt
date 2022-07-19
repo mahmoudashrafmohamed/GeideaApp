@@ -1,5 +1,6 @@
 package com.mahmoudashraf.geideaapp.data.repository
 
+import com.mahmoudashraf.geideaapp.data.entity.User
 import com.mahmoudashraf.geideaapp.data.entity.UserDetails
 import com.mahmoudashraf.geideaapp.data.entity.UserResponse
 import com.mahmoudashraf.geideaapp.data.sources.local.UserDao
@@ -19,5 +20,9 @@ class UsersRepositoryImpl @Inject constructor(
 
     override suspend fun getUserByID(userID: Int): UserDetails {
         return remoteDataSource.getUserByID(userID)
+    }
+
+    override fun getAllCachedUsers(): List<User> {
+        return localDataSource.getAll()
     }
 }

@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/mahmoud_ashraf/AndroidStudioProjects/GeideaApp/app/src/main/res/layout/activity_main.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/mahmoud_ashraf/AndroidStudioProjects/GeideaApp/app/src/main/res/layout/fragment_user_details.xml" value="0.25" />
         <entry key="..\:/Users/mahmoud_ashraf/AndroidStudioProjects/GeideaApp/app/src/main/res/layout/fragment_users_list.xml" value="0.264" />
         <entry key="..\:/Users/mahmoud_ashraf/AndroidStudioProjects/GeideaApp/app/src/main/res/layout/item_users_list.xml" value="0.10885416666666667" />
       </map>
