@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder
 import com.mahmoudashraf.geideaapp.core.BASE_URL
 import com.mahmoudashraf.geideaapp.core.roomDBName
 import com.mahmoudashraf.geideaapp.data.repository.UsersRepositoryImpl
+import com.mahmoudashraf.geideaapp.data.sources.local.UserDao
 import com.mahmoudashraf.geideaapp.data.sources.local.UserDatabase
 import com.mahmoudashraf.geideaapp.data.sources.remote.UsersApi
 import com.mahmoudashraf.geideaapp.domain.interactor.UsersInterActor
@@ -28,12 +29,17 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun provideUserDatabase(@ApplicationContext appContext: Context): UserDatabase {
-        return Room.databaseBuilder(
+    fun provideUserDatabase(@ApplicationContext appContext: Context) =
+         Room.databaseBuilder(
             appContext,
             UserDatabase::class.java,
             roomDBName
         ).build()
+
+    @Singleton
+    @Provides
+    fun provideUsersDAO(appDatabase: UserDatabase): UserDao {
+        return appDatabase.userDao()
     }
 
     @Provides
@@ -83,7 +89,7 @@ object AppModule {
     @Singleton
     fun provideAppRepository(
         remoteDataSource: UsersApi,
-        localDataSource: UserDatabase
+        localDataSource: UserDao
     ): UsersRepository {
         return UsersRepositoryImpl(remoteDataSource, localDataSource)
     }

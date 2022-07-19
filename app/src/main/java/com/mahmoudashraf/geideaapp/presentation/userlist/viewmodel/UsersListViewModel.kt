@@ -16,7 +16,11 @@ class UsersListViewModel @Inject constructor(
 ) : ViewModel() {
     val screenState by lazy { MutableLiveData<UsersListScreenState>() }
 
-    fun getAllUsers(){
+    init {
+        getAllUsers()
+    }
+
+   private fun getAllUsers(){
         screenState.postValue(UsersListScreenState.Loading)
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -36,6 +40,6 @@ class UsersListViewModel @Inject constructor(
 
 sealed class UsersListScreenState {
     object Loading : UsersListScreenState()
-    class Success(users: List<User>) : UsersListScreenState()
-    class Error(message: String) : UsersListScreenState()
+    data class Success(val users: List<User>) : UsersListScreenState()
+    data class Error(val message: String) : UsersListScreenState()
 }
